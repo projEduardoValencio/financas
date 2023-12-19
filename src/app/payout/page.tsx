@@ -8,7 +8,7 @@ const IndexDashboard : React.FC = () =>{
             <SideBar />
           </SideBarProvider>
 
-          <h1 className="text-black font-black text-2xl">DASHBOARD</h1>
+          <h1 className="text-black font-black text-2xl">PAYOUT</h1>
         </main>
     )
 }

@@ -1,0 +1,1 @@
+export type bgColor = "black" | "red" | "green" | "blue" | "white" | "yellow"

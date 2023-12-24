@@ -16,7 +16,7 @@ const DashBoardCard: FC<Props> = ({label, value, color, icon}) => {
         <span className="text-xl font-bold">R$ {moneyFormat(value)}</span>
       </div>
 
-      <div className={`size-10 bg-${color} rounded-full items-center justify-center p-2`}>
+      <div className={`size-10 bg-a${color} rounded-full items-center justify-center p-2`}>
         {icon}
       </div>
     </div>

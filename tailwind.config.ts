@@ -14,19 +14,22 @@ const config: Config = {
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       colors: {
-        red: "#db0000",
-        blue: '#1fb6ff',
-        purple: '#7e5bef',
-        pink: '#ff49db',
-        orange: '#ff7849',
-        green: '#13ce66',
-        yellow: '#ffc82c',
-        'gray-dark': '#273444',
-        gray: '#8492a6',
-        'gray-light': '#d3dce6',
+        ared: "#db0000",
+        ablue: '#1fb6ff',
+        apurple: '#7e5bef',
+        apink: '#ff49db',
+        aorange: '#ff7849',
+        agreen: '#13ce66',
+        ayellow: '#ffc82c',
+        'agray-dark': '#273444',
+        agray: '#8492a6',
+        'agray-light': '#d3dce6',
       }
     },
   },
   plugins: [],
+  safelist: [{
+    pattern: /(bg|text|border)-a(red|blue|purple|pink|orange|yellow|green|blue|gray-dark|gray|gray-light)/
+  }]
 }
 export default config

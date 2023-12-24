@@ -1,3 +1,5 @@
+"use client";
+
 import { ITransaction } from "@/interfaces/transactions";
 import { createContext, useCallback, useState } from "react";
 

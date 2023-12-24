@@ -10,7 +10,13 @@ const IndexDashboard : React.FC = () =>{
             <SideBar />
           </SideBarProvider>
 
-          <div className="h-screen w-full justify-center p-10">
+          <div className="flex flex-col h-screen w-full p-10 items-center">
+            <input 
+              className="text-black rounded-full shadow-md mb-6 border-blue-300 border-1 px-2"
+              type="month"
+              max={new Date().getFullYear().toString() + "/" + new Date().getMonth().toString()}
+            />
+
             <div className="flex flex-row gap-5 justify-center">
               <DashBoardCard
                 color="blue"

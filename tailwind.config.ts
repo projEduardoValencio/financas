@@ -26,6 +26,9 @@ const config: Config = {
         'agray-light': '#d3dce6',
       }
     },
+    borderWidth:{
+      1: '1px'
+    }
   },
   plugins: [],
   safelist: [{

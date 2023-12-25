@@ -8,13 +8,13 @@ export const sideBarItemList : ISideBarItem[] = [
       route: routes.dashboard
     },
     {
-      text: 'Receive',
+      text: 'Revenue',
       active: false,
-      route: routes.receive
+      route: routes.revenue
     },
     {
-      text: 'Payout',
+      text: 'Expense',
       active: false,
-      route: routes.payout
+      route: routes.expense
     },
 ];

@@ -1,6 +1,6 @@
 export const routes = {
   dashboard: '/dashboard',
-  receive: '/receive',
-  payout: '/payout'
+  revenue: '/revenue',
+  expense: '/expense'
 }
   

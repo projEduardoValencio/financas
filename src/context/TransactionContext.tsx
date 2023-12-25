@@ -6,7 +6,7 @@ import addTransactionLocalStorage from "@/utils/Transaction/localStorage/addTran
 import getTransactionLocalStorage from "@/utils/Transaction/localStorage/getTransactionLocalStorage";
 import nextTransactionId from "@/utils/Transaction/localStorage/nextTransactionId";
 import removeTransactionLocalStorage from "@/utils/Transaction/localStorage/removeTransactionLocalStorage ";
-import { createContext, useCallback, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 
 interface ObjectContext{
   transactions: ITransaction[],
@@ -35,7 +35,11 @@ interface ProviderProps{
   children: JSX.Element
 }
 export const TransactionProvider : React.FC<ProviderProps> = ({children}) =>{
-  const [transactions, setTransactions] = useState<ITransaction[]>(getTransactionLocalStorage())
+  const [transactions, setTransactions] = useState<ITransaction[]>([])
+
+  useEffect(()=>{
+    setTransactions(getTransactionLocalStorage());
+  },[])
 
   const [openTransactionModal, setOpenTransactionModal] = useState<Boolean>(false);
   const [typeTransaction, setTypeTransaction] = useState<EnumTypeTransaction>(EnumTypeTransaction.revenue);

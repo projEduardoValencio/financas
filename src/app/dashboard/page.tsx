@@ -1,6 +1,7 @@
 import DashBoardCard from "@/components/DashBoardCard/DashBoardCard";
 import SideBar from "@/components/SideBar/SideBar";
 import { SideBarProvider } from "@/components/SideBar/SideBarContext";
+import TransactionModal from "@/components/TransactionModal/TransactionModal";
 import { ArrowDownward, ArrowUpward, WalletRounded } from "@mui/icons-material";
 
 const IndexDashboard : React.FC = () =>{

@@ -1,10 +1,14 @@
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import { Add, TrendingDownRounded, TrendingUpRounded } from "@mui/icons-material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { TransactionContext } from "@/context/TransactionContext";
+import TransactionModal from "../TransactionModal/TransactionModal";
 
 interface Props{}
 const NewTransactionMenu: FC<Props> = ({}) => {
+  const {handleOpenExpenseTransactionModal, handleOpenRevenueTransactionModal} = useContext(TransactionContext)
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
@@ -39,12 +43,12 @@ const NewTransactionMenu: FC<Props> = ({}) => {
         }}
         className="[&>.MuiPaper-root]:rounded-xl [&>.MuiPaper-root]:w-44 [&>.MuiPaper-root]:bg-slate-100"
       >
-        <MenuItem onClick={handleClose} className="flex flex-row gap-5">
+        <MenuItem onClick={()=>handleOpenRevenueTransactionModal()} className="flex flex-row gap-5">
           <TrendingUpRounded style={{color: 'green'}}/>
           Revenue
         </MenuItem>
 
-        <MenuItem onClick={handleClose} className="flex flex-row gap-5">
+        <MenuItem onClick={()=>handleOpenExpenseTransactionModal()} className="flex flex-row gap-5">
           <TrendingDownRounded style={{color: 'red'}}/>
           Expense
         </MenuItem>

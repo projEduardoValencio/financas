@@ -1,15 +1,28 @@
 "use client";
 
-import { ITransaction } from "@/interfaces/transactions";
+import TransactionModal from "@/components/TransactionModal/TransactionModal";
+import { EnumTypeTransaction, ITransaction } from "@/interfaces/transactions";
 import { createContext, useCallback, useState } from "react";
 
 interface ObjectContext{
   transactions: ITransaction[],
   addTransaction: Function,
+  openTransactionModal: Boolean,
+  handleOpenRevenueTransactionModal: Function,
+  handleOpenExpenseTransactionModal: Function,
+  handleCloseTransactionModal: Function,
+  handleToggleTransactionModal: Function,
+  typeTransaction: EnumTypeTransaction,
 }
 export const TransactionContext = createContext<ObjectContext>({
   transactions: [],
   addTransaction: ()=>{},
+  openTransactionModal: false,
+  handleOpenRevenueTransactionModal: ()=>{},
+  handleOpenExpenseTransactionModal: ()=>{},
+  handleCloseTransactionModal: ()=>{},
+  handleToggleTransactionModal: ()=>{},
+  typeTransaction: EnumTypeTransaction.revenue,
 });
 
 interface ProviderProps{
@@ -17,15 +30,45 @@ interface ProviderProps{
 }
 export const TransactionProvider : React.FC<ProviderProps> = ({children}) =>{
   const [transactions, setTransactions] = useState<ITransaction[]>([])
+
+  const [openTransactionModal, setOpenTransactionModal] = useState<Boolean>(false);
+  const [typeTransaction, setTypeTransaction] = useState<EnumTypeTransaction>(EnumTypeTransaction.revenue);
+
+  const handleOpenRevenueTransactionModal = () => {
+    setTypeTransaction(EnumTypeTransaction.revenue)
+    setOpenTransactionModal(true)
+  }
+  const handleOpenExpenseTransactionModal = () => {
+    setTypeTransaction(EnumTypeTransaction.expense)
+    setOpenTransactionModal(true)
+  }
+  const handleCloseTransactionModal = () => {
+    setOpenTransactionModal(false)
+  }
+  const handleToggleTransactionModal = () => { 
+    setOpenTransactionModal(!openTransactionModal)
+  }
   
   const addTransaction = useCallback((transaction: ITransaction)=>{
-    setTransactions([...transactions, transaction]);
+    setTransactions((prevTransaction) => [...prevTransaction, transaction]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
   return (
-    <TransactionContext.Provider value={{transactions, addTransaction}}>
+    <TransactionContext.Provider 
+      value={{
+        transactions, 
+        addTransaction, 
+        openTransactionModal, 
+        handleCloseTransactionModal,
+        handleOpenExpenseTransactionModal,
+        handleOpenRevenueTransactionModal,
+        handleToggleTransactionModal,
+        typeTransaction,
+      }}
+    >
       {children}
+      <TransactionModal/>
     </TransactionContext.Provider>
   );
 }

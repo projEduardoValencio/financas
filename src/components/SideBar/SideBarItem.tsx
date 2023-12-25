@@ -8,24 +8,31 @@ interface Props{
     pos: number,
     text: string,
     active?: boolean,
+    icon?: JSX.Element,
 }
-const SideBarItem: FC<Props> = ({pos, text, active}) => {
-  const {itemList, setItemList} = useContext(SideBarContext);
+const SideBarItem: FC<Props> = ({pos, text, active, icon}) => {
+  const {itemList, setItemList, expended} = useContext(SideBarContext);
   const router = useRouter();
 
   return (
-    <li className="list-none w-full relative text-center hover:bg-slate-200 py-3" onClick={()=>clickToActive(pos, setItemList, itemList, router)}>
+    <li className="list-none w-full relative hover:bg-slate-200 py-3 h-14 flex flex-row justify-start" onClick={()=>clickToActive(pos, setItemList, itemList, router)}>
       {active ? 
         <div className="bg-apurple h-full absolute -mt-3" style={{width: '5px'}}/>
         : 
         null
       }
 
+      <div className={`w-24 ${active ? '[&>.MuiSvgIcon-root]:text-apurple' : '[&>.MuiSvgIcon-root]:text-gray-700'}`} style={{maxWidth: '96px', minWidth: '96px'}}>
+        {icon}
+      </div>
+
       <span className={`
-        text-2xl text-center
+        text-lg text-left w-full 
         ${active ? 'text-apurple' : 'text-gray-700'}
+        ${expended ? '' : 'hidden'}
       `}>
-        {text}</span>
+        {text}
+      </span>
     </li>
   );
 }

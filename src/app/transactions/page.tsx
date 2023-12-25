@@ -5,9 +5,7 @@ import TransactionsList from "@/components/TransactionsList/TransactionsList";
 const IndexTransactions : React.FC = () =>{
     return (
         <main className="h-screen flex bg-slate-100">
-          <SideBarProvider>
-            <SideBar />
-          </SideBarProvider>
+          <SideBar />
 
           <div className="flex flex-col items-center w-full p-10">
             <TransactionsList/>

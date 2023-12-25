@@ -2,14 +2,13 @@ import DashBoardCard from "@/components/DashBoardCard/DashBoardCard";
 import SideBar from "@/components/SideBar/SideBar";
 import { SideBarProvider } from "@/components/SideBar/SideBarContext";
 import TransactionModal from "@/components/TransactionModal/TransactionModal";
+import TransactionsList from "@/components/TransactionsList/TransactionsList";
 import { ArrowDownward, ArrowUpward, WalletRounded } from "@mui/icons-material";
 
 const IndexDashboard : React.FC = () =>{
     return (
         <main className="h-screen flex bg-slate-100">
-          <SideBarProvider>
-            <SideBar />
-          </SideBarProvider>
+          <SideBar />
 
           <div className="flex flex-col h-screen w-full p-10 items-center">
             <input 
@@ -18,7 +17,7 @@ const IndexDashboard : React.FC = () =>{
               max={new Date().getFullYear().toString() + "/" + new Date().getMonth().toString()}
             />
 
-            <div className="flex flex-row gap-5 justify-center">
+            <div className="flex flex-row gap-5 justify-center mb-10">
               <DashBoardCard
                 color="blue"
                 label="Saldo atual"
@@ -40,6 +39,8 @@ const IndexDashboard : React.FC = () =>{
                 icon={<ArrowUpward style={{color: "white"}}/>}
               />
             </div>
+
+            <TransactionsList/>
           </div>
         </main>
     )

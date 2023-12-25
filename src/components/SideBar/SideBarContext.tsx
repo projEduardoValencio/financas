@@ -4,15 +4,19 @@
 import { ISideBarItem } from "@/interfaces/SideBar";
 import { sideBarItemList } from "@/utils/SideBar/itemList";
 import { usePathname, useRouter } from "next/navigation";
-import { Dispatch, SetStateAction, createContext, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, createContext, useCallback, useEffect, useState } from "react";
 
 interface ObjectContext{
   itemList: ISideBarItem[],
   setItemList: Dispatch<SetStateAction<ISideBarItem[]>>,
+  expended: boolean,
+  toggleExpended: Function,
 }
 export const SideBarContext = createContext<ObjectContext>({
   itemList: sideBarItemList,
   setItemList: ()=>{},
+  expended: false,
+  toggleExpended: ()=>{}
 });
 
 interface ProviderProps{
@@ -20,6 +24,7 @@ interface ProviderProps{
 }
 export const SideBarProvider : React.FC<ProviderProps> = ({children}) =>{
     const [itemList, setItemList] = useState<ISideBarItem[]>(sideBarItemList);
+    const [expended, setExpended] = useState<boolean>(false);
     const pathname = usePathname();
 
     useEffect(()=>{
@@ -33,9 +38,22 @@ export const SideBarProvider : React.FC<ProviderProps> = ({children}) =>{
       setItemList(newList);
     }, [])
 
-    return <SideBarContext.Provider value={{itemList, setItemList}}>
+    const toggleExpended = useCallback(()=>{
+      setExpended(prevExpended => !prevExpended);
+    },[])
+
+    return (
+      <SideBarContext.Provider 
+        value={{
+          itemList, 
+          setItemList,
+          expended,
+          toggleExpended,
+        }}
+      >
         {children}
-        </SideBarContext.Provider>;
+      </SideBarContext.Provider>
+    );
 }
 
 // const {i1, i2} = useContext(context)

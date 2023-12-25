@@ -8,12 +8,25 @@ import NewTransactionMenu from "./NewTransactionMenu";
 
 interface Props {}
 const SideBar: FC<Props> = ({}) => {
-  const {itemList} = useContext(SideBarContext);
+  const {itemList, expended, toggleExpended} = useContext(SideBarContext);
 
   return (
-    <aside className="h-screen bg-white">
-        <nav className="h-full w-56 shadow-lg bg-white shadow-slate-400 rounded-br-2xl rounded-tr-2xl flex flex-col py-5 items-center">
-          <div className="bg-red-100 h-16 rounded-xl text-black text-center flex items-center justify-center font-black text-4xl w-52">LOGO</div>
+    <aside className="h-screen bg-white transition-all">
+        <nav 
+          className={`
+            h-full shadow-lg bg-white shadow-slate-400 rounded-br-2xl rounded-tr-2xl flex flex-col py-5 items-center transition-all
+            ${expended ? 'w-56' : 'w-24'}
+          `}
+        >
+          <div 
+            className={`
+              bg-purple-200 h-16 rounded-xl text-black text-center flex items-center justify-center font-black text-4xl cursor-pointer
+              ${expended ? 'w-52' : 'w-20'}
+            `}
+            onClick={()=>toggleExpended()}
+          >
+            {expended ? 'LOGO' : 'L'}
+          </div>
 
           <NewTransactionMenu/>
 
@@ -27,7 +40,7 @@ const SideBar: FC<Props> = ({}) => {
 
 const itemFactory = (list : ISideBarItem[]) =>{
   return list.map((value, index)=>{
-    return (<SideBarItem key={`${index}-sidebar-item`} text={value.text} active={value.active} pos={index}/>)
+    return (<SideBarItem key={`${index}-sidebar-item`} text={value.text} active={value.active} pos={index} icon={value.icon}/>)
   })
 }
 

@@ -4,10 +4,12 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { TransactionContext } from "@/context/TransactionContext";
 import TransactionModal from "../TransactionModal/TransactionModal";
+import { SideBarContext } from "./SideBarContext";
 
 interface Props{}
 const NewTransactionMenu: FC<Props> = ({}) => {
-  const {handleOpenExpenseTransactionModal, handleOpenRevenueTransactionModal} = useContext(TransactionContext)
+  const {expended} = useContext(SideBarContext);
+  const {handleOpenExpenseTransactionModal, handleOpenRevenueTransactionModal} = useContext(TransactionContext);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -21,12 +23,14 @@ const NewTransactionMenu: FC<Props> = ({}) => {
   return (
     <div className="transition-all">
       <div 
-        className={`flex flex-row justify-between gap-3 mt-5 items-center rounded-full h-14 w-44 bg-purple-500 px-5 hover:bg-purple-700 hover:cursor-pointer`}
+        className={`flex flex-row mt-5 items-center rounded-full bg-apurple transition-all
+        ${expended ? 'h-14 w-44 px-5 justify-between gap-3' : 'h-14 w-14 justify-center'}
+        hover:bg-purple-700 hover:cursor-pointer`}
         onClick={handleClick}
       >
         <Add style={{color: 'white', stroke: 'white', strokeWidth: 0.5}}/>
 
-        <span className="font-extrabold mr-10"> NOVO </span>
+        { expended ? <span className="font-extrabold mr-10"> NOVO </span> : null }
       </div>
       <Menu
         id="basic-menu"

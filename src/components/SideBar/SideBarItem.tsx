@@ -14,10 +14,16 @@ const SideBarItem: FC<Props> = ({pos, text, active}) => {
   const router = useRouter();
 
   return (
-    <li className="list-none" onClick={()=>clickToActive(pos, setItemList, itemList, router)}>
+    <li className="list-none w-full relative text-center hover:bg-slate-200 py-3" onClick={()=>clickToActive(pos, setItemList, itemList, router)}>
+      {active ? 
+        <div className="bg-apurple h-full absolute -mt-3" style={{width: '5px'}}/>
+        : 
+        null
+      }
+
       <span className={`
-        text-2xl
-        ${active ? 'text-red-600 font-bold' : 'text-gray-700'}
+        text-2xl text-center
+        ${active ? 'text-apurple' : 'text-gray-700'}
       `}>
         {text}</span>
     </li>

@@ -11,13 +11,13 @@ const SideBar: FC<Props> = ({}) => {
   const {itemList} = useContext(SideBarContext);
 
   return (
-    <aside className="h-screen bg-slate-100">
-        <nav className="h-full w-56 shadow-lg bg-cyan-500 shadow-slate-400 rounded-br-2xl rounded-tr-2xl flex flex-col py-5 items-center">
+    <aside className="h-screen bg-white">
+        <nav className="h-full w-56 shadow-lg bg-white shadow-slate-400 rounded-br-2xl rounded-tr-2xl flex flex-col py-5 items-center">
           <div className="bg-red-100 h-16 rounded-xl text-black text-center flex items-center justify-center font-black text-4xl w-52">LOGO</div>
 
           <NewTransactionMenu/>
 
-          <div className="flex flex-col gap-3 mt-5 items-center">
+          <div className="flex flex-col mt-5 items-center w-full">
             {itemFactory(itemList)}
           </div>
         </nav>

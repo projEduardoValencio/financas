@@ -10,7 +10,7 @@ interface Props{
 }
 const DashBoardCard: FC<Props> = ({label, value, color, icon}) => {
   return (
-    <div className="h-16 w-60 bg-slate-200 flex flex-row rounded-xl shadow-md text-black p-2 justify-between items-center">
+    <div className="h-16 w-60 bg-white flex flex-row rounded-xl shadow-md text-black p-2 justify-between items-center">
       <div className="flex flex-col">
         <span className="text-xs">{label}</span>
         <span className="text-xl font-bold">R$ {moneyFormat(value)}</span>

@@ -1,16 +1,19 @@
 import SideBar from "@/components/SideBar/SideBar";
 import { SideBarProvider } from "@/components/SideBar/SideBarContext";
+import TransactionsList from "@/components/TransactionsList/TransactionsList";
 
-const IndexDashboard : React.FC = () =>{
+const IndexTransactions : React.FC = () =>{
     return (
         <main className="h-screen flex bg-slate-100">
           <SideBarProvider>
             <SideBar />
           </SideBarProvider>
 
-          <h1 className="text-black font-black text-2xl">RECEIVE</h1>
+          <div className="flex flex-col items-center w-full p-10">
+            <TransactionsList/>
+          </div>
         </main>
     )
 }
 
-export default IndexDashboard;
+export default IndexTransactions;

@@ -1,5 +1,5 @@
 export interface ITransaction{
-  id: Number,
+  id: number,
   type: EnumTypeTransaction,
   value: number,
 }

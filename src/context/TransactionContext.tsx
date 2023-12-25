@@ -4,6 +4,7 @@ import TransactionModal from "@/components/TransactionModal/TransactionModal";
 import { EnumTypeTransaction, ITransaction } from "@/interfaces/transactions";
 import addTransactionLocalStorage from "@/utils/Transaction/localStorage/addTransactionLocalStorage";
 import getTransactionLocalStorage from "@/utils/Transaction/localStorage/getTransactionLocalStorage";
+import nextTransactionId from "@/utils/Transaction/localStorage/nextTransactionId";
 import removeTransactionLocalStorage from "@/utils/Transaction/localStorage/removeTransactionLocalStorage ";
 import { createContext, useCallback, useState } from "react";
 
@@ -55,6 +56,7 @@ export const TransactionProvider : React.FC<ProviderProps> = ({children}) =>{
   }
   
   const addTransaction = useCallback((transaction: ITransaction)=>{
+    transaction.id = nextTransactionId();
     setTransactions(addTransactionLocalStorage(transaction));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);

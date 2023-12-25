@@ -2,11 +2,15 @@
 
 import TransactionModal from "@/components/TransactionModal/TransactionModal";
 import { EnumTypeTransaction, ITransaction } from "@/interfaces/transactions";
+import addTransactionLocalStorage from "@/utils/Transaction/localStorage/addTransactionLocalStorage";
+import getTransactionLocalStorage from "@/utils/Transaction/localStorage/getTransactionLocalStorage";
+import removeTransactionLocalStorage from "@/utils/Transaction/localStorage/removeTransactionLocalStorage ";
 import { createContext, useCallback, useState } from "react";
 
 interface ObjectContext{
   transactions: ITransaction[],
   addTransaction: Function,
+  removeTransaction: Function,
   openTransactionModal: Boolean,
   handleOpenRevenueTransactionModal: Function,
   handleOpenExpenseTransactionModal: Function,
@@ -17,6 +21,7 @@ interface ObjectContext{
 export const TransactionContext = createContext<ObjectContext>({
   transactions: [],
   addTransaction: ()=>{},
+  removeTransaction: ()=>{},
   openTransactionModal: false,
   handleOpenRevenueTransactionModal: ()=>{},
   handleOpenExpenseTransactionModal: ()=>{},
@@ -29,7 +34,7 @@ interface ProviderProps{
   children: JSX.Element
 }
 export const TransactionProvider : React.FC<ProviderProps> = ({children}) =>{
-  const [transactions, setTransactions] = useState<ITransaction[]>([])
+  const [transactions, setTransactions] = useState<ITransaction[]>(getTransactionLocalStorage())
 
   const [openTransactionModal, setOpenTransactionModal] = useState<Boolean>(false);
   const [typeTransaction, setTypeTransaction] = useState<EnumTypeTransaction>(EnumTypeTransaction.revenue);
@@ -50,7 +55,12 @@ export const TransactionProvider : React.FC<ProviderProps> = ({children}) =>{
   }
   
   const addTransaction = useCallback((transaction: ITransaction)=>{
-    setTransactions((prevTransaction) => [...prevTransaction, transaction]);
+    setTransactions(addTransactionLocalStorage(transaction));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
+
+  const removeTransaction = useCallback((transaction: ITransaction)=>{
+    setTransactions(removeTransactionLocalStorage(transaction));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
 
@@ -59,6 +69,7 @@ export const TransactionProvider : React.FC<ProviderProps> = ({children}) =>{
       value={{
         transactions, 
         addTransaction, 
+        removeTransaction, 
         openTransactionModal, 
         handleCloseTransactionModal,
         handleOpenExpenseTransactionModal,

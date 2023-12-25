@@ -1,6 +1,7 @@
 export interface ITransaction{
-  type: EnumTypeTransaction
-  value: number
+  id: Number,
+  type: EnumTypeTransaction,
+  value: number,
 }
 
 export enum EnumTypeTransaction {
